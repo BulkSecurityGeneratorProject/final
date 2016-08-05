@@ -14,6 +14,8 @@
         vm.clear = clear;
         vm.save = save;
         vm.phones = Phone.query();
+        vm.addNewChoice=addNewChoice;
+        vm.removeChoice=removeChoice;
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -42,6 +44,15 @@
             vm.isSaving = false;
         }
 
+        function addNewChoice () {
+            var newItemNo = vm.student.phones.length+1;
+            vm.student.phones.push({'id':'choice'+newItemNo});
+        };
+    
+        function removeChoice = function() {
+            var lastItem = vm.student.phones.length-1;
+            vm.student.phones.splice(lastItem);
+        };
 
     }
 })();
