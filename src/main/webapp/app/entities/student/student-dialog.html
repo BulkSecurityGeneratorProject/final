@@ -24,6 +24,12 @@
                     This field is required.
                 </p>
             </div>
+            <div ng-repeat="phone in vm.student.phones>
+                <label class="control-label" for="field_phone">Phone Number</label>
+                  <input type="text" class="form-control" name="phone" id="field_phone"
+                    ng-model="phone"
+                    required />
+            </div>
 
 
         </div>
