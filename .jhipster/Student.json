@@ -1,0 +1,24 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "phone",
+            "otherEntityName": "phone",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "student"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160804174543",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "student",
+    "pagination": "pagination"
+}

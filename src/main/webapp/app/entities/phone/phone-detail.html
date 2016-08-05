@@ -1,0 +1,22 @@
+
+<div>
+    <h2><span translate="finalApp.phone.detail.title">Phone</span> {{vm.phone.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="finalApp.phone.number">Number</span></dt>
+        <dd>
+            <span>{{vm.phone.number}}</span>
+        </dd>
+        <dt><span translate="finalApp.phone.student">Student</span></dt>
+        <dd>
+            <a ui-sref="student-detail({id:vm.phone.studentId})">{{vm.phone.studentId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
