@@ -30,6 +30,12 @@
                     ng-model="phone"
                     required />
             </div>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
 
 
         </div>
