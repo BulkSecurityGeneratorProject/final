@@ -23,7 +23,7 @@ import javax.inject.Inject;
 @SuppressWarnings("unused")
 @Configuration
 @EnableCaching
-@AutoConfigureAfter(value = { MetricsConfiguration.class, DatabaseConfiguration.class })
+@AutoConfigureAfter(value = { MetricsConfiguration.class, DatabaseConfiguration.class, SecondaryDatabaseConfiguration.class })
 public class CacheConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
@@ -65,8 +65,8 @@ public class CacheConfiguration {
             config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
             config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(false);
         }
-        
-        
+
+
         config.getMapConfigs().put("default", initializeDefaultMapConfig());
         config.getMapConfigs().put("com.guessmyfuture.edg.domain.*", initializeDomainMapConfig(jHipsterProperties));
         config.getMapConfigs().put("clustered-http-sessions", initializeClusteredSession(jHipsterProperties));

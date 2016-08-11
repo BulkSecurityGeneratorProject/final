@@ -24,20 +24,19 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.context.annotation.Primary;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.guessmyfuture.edg.repository",transactionManagerRef = "primaryTransactionManager")
+@EnableJpaRepositories(basePackages = "com.guessmyfuture.edg.repository",transactionManagerRef = "secondaryTransactionManager")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
 @EnableElasticsearchRepositories("com.guessmyfuture.edg.repository.search")
-public class DatabaseConfiguration {
+public class SecondaryDatabaseConfiguration {
 
-    private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
+    private final Logger log = LoggerFactory.getLogger(SecondaryDatabaseConfiguration.class);
 
     @Inject
     private Environment env;
@@ -46,9 +45,8 @@ public class DatabaseConfiguration {
     private MetricRegistry metricRegistry;
 
     @Bean(destroyMethod = "close")
-    @Primary
     @ConditionalOnExpression("#{!environment.acceptsProfiles('" + Constants.SPRING_PROFILE_CLOUD + "') && !environment.acceptsProfiles('" + Constants.SPRING_PROFILE_HEROKU + "')}")
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+    @ConfigurationProperties(prefix = "spring.datasource1.hikari")
     public DataSource dataSource(DataSourceProperties dataSourceProperties, CacheManager cacheManager) {
         log.debug("Configuring Datasource");
         if (dataSourceProperties.getUrl() == null) {
@@ -74,7 +72,6 @@ public class DatabaseConfiguration {
     }
 
     @Bean
-    @Primary
     public SpringLiquibase liquibase(DataSource dataSource, DataSourceProperties dataSourceProperties,
         LiquibaseProperties liquibaseProperties) {
 
@@ -96,7 +93,6 @@ public class DatabaseConfiguration {
     }
 
     @Bean
-    @Primary
     public Hibernate4Module hibernate4Module() {
         return new Hibernate4Module();
     }

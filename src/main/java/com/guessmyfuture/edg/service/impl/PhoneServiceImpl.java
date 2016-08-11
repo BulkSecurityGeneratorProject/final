@@ -29,22 +29,23 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class PhoneServiceImpl implements PhoneService{
 
     private final Logger log = LoggerFactory.getLogger(PhoneServiceImpl.class);
-    
+
     @Inject
     private PhoneRepository phoneRepository;
-    
+
     @Inject
     private PhoneMapper phoneMapper;
-    
+
     @Inject
     private PhoneSearchRepository phoneSearchRepository;
-    
+
     /**
      * Save a phone.
-     * 
+     *
      * @param phoneDTO the entity to save
      * @return the persisted entity
      */
+    @Transactional("secondaryTransactionManager")
     public PhoneDTO save(PhoneDTO phoneDTO) {
         log.debug("Request to save Phone : {}", phoneDTO);
         Phone phone = phoneMapper.phoneDTOToPhone(phoneDTO);
@@ -56,14 +57,14 @@ public class PhoneServiceImpl implements PhoneService{
 
     /**
      *  Get all the phones.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional("secondaryTransactionManager")
     public Page<Phone> findAll(Pageable pageable) {
         log.debug("Request to get all Phones");
-        Page<Phone> result = phoneRepository.findAll(pageable); 
+        Page<Phone> result = phoneRepository.findAll(pageable);
         return result;
     }
 
@@ -73,7 +74,7 @@ public class PhoneServiceImpl implements PhoneService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional("secondaryTransactionManager")
     public PhoneDTO findOne(Long id) {
         log.debug("Request to get Phone : {}", id);
         Phone phone = phoneRepository.findOne(id);
@@ -83,9 +84,10 @@ public class PhoneServiceImpl implements PhoneService{
 
     /**
      *  Delete the  phone by id.
-     *  
+     *
      *  @param id the id of the entity
      */
+    @Transactional("secondaryTransactionManager")
     public void delete(Long id) {
         log.debug("Request to delete Phone : {}", id);
         phoneRepository.delete(id);
@@ -98,7 +100,7 @@ public class PhoneServiceImpl implements PhoneService{
      *  @param query the query of the search
      *  @return the list of entities
      */
-    @Transactional(readOnly = true)
+    @Transactional("secondaryTransactionManager")
     public Page<Phone> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Phones for query {}", query);
         return phoneSearchRepository.search(queryStringQuery(query), pageable);

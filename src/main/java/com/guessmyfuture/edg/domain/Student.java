@@ -32,8 +32,7 @@ public class Student implements Serializable {
     private String name;
 
     @OneToMany
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    //    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Phone> phones = new HashSet<>();
 
     public Long getId() {
