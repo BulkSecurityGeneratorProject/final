@@ -1,0 +1,33 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "blog_title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "category",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tag",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160823135717",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "blog",
+    "pagination": "pagination"
+}

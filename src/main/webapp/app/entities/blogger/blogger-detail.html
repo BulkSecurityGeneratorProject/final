@@ -1,0 +1,22 @@
+
+<div>
+    <h2><span translate="finalApp.blogger.detail.title">Blogger</span> {{vm.blogger.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="finalApp.blogger.content">Content</span></dt>
+        <dd>
+            <span>{{vm.blogger.content}}</span>
+        </dd>
+        <dt><span translate="finalApp.blogger.blog">Blog</span></dt>
+        <dd>
+            <span>{{vm.blogger.blog}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
